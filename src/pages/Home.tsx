@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaHtml5, FaJs } from "react-icons/fa";
 import { SiTypescript, SiNextdotjs } from "react-icons/si"; 
 import { TbLetterV } from "react-icons/tb"; 
 import { GoCode } from "react-icons/go"; 
