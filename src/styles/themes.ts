@@ -13,9 +13,9 @@ export interface Theme {
 // 2. Tema Claro (Light Mode)
 export const lightTheme: Theme = {
   colors: {
-    primary: '#8a2be2',        // Ex: Roxo Suave para destaque
-    secondary: '#2c3e50',      // Ex: Azul Marinho Escuro para títulos
-    background: '#f8f8f8',     // Fundo: Off-White muito claro
+    primary: '#8a2be2',        // Roxo Suave para destaque
+    secondary: '#2c3e50',      // Azul Marinho Escuro para títulos
+    background: '#E9E3F8',     // <-- NOVA COR: Lilás muito claro/Roxo suave
     surface: '#ffffff',        // Superfície: Branco puro para cards
     text: '#333333',           // Texto: Preto suave
     textSecondary: '#6c757d',  // Texto Secundário: Cinza
