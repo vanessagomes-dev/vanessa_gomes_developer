@@ -7,6 +7,12 @@
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
+    
+    /* NOVO: Configuração de Alias de Importação */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

@@ -1,9 +1,7 @@
-// src/components/Header.tsx
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaBars, FaTimes, FaSun, FaMoon, FaCode } from 'react-icons/fa'; // Ícones necessários
+import { FaBars, FaTimes, FaSun, FaMoon, FaCode } from 'react-icons/fa'; 
 import { motion } from 'framer-motion';
 
 // 1. Definição da Interface de Props
