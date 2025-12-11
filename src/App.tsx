@@ -7,7 +7,10 @@ import { Routes, Route } from 'react-router-dom';
 
 // -- COMPONENTES 
 import Header from './components/Header';
+
+// -- PÁGINAS
 import Home from './pages/Home';
+import About from './pages/About';
 
 
 
@@ -38,10 +41,13 @@ function App() {
           <Routes>
             {/* Estas serão as rotas, criar as páginas*/}
             <Route path="/" element={<Home />} /> 
-            <Route path="/about" element={<h1>Sobre</h1>} />
+            <Route path="/sobre" element={<About />} />
             <Route path="/projects" element={<h1>Projetos</h1>} />
             <Route path="/skills" element={<h1>Skills</h1>} />
             <Route path="/contact" element={<h1>Contato</h1>} />
+
+            {/* Rota de fallback para 404, se necessário */}
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
 

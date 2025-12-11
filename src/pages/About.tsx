@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import SkillMatrix from '../components/SkillMatrix';
 
 // ===============================================
 // 1. ESTILIZAÇÃO DOS CONTAINERS GERAIS
@@ -163,6 +164,9 @@ const About: React.FC = () => {
                 <BioText>
                     Como desenvolvedora Full Stack, possuo experiência sólida em **{/* front-end */}** (React, TypeScript, Redux) e **{/* back-end */}** (Node.js, Express, PHP). Meu foco principal é transformar desafios complexos em soluções de código elegantes e eficientes.
                 </BioText>
+                
+                {/* INTEGRAÇÃO DO SKILL MATRIX AQUI */}
+                <SkillMatrix />
 
                 {/* Futuro componente de Skills/Tecnologias virá aqui */}
             </TextSection>
