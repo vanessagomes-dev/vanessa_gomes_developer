@@ -9,8 +9,11 @@ import { groupedProjects, type Project } from '../data/projectData';
 // ===============================================
 
 const ProjectsContainer = styled(motion.section)`
-    min-height: 100vh;
+    min-height: 100vh; 
     padding: 4rem 6rem;
+    border: 1px solid ${(props) => props.theme.colors.textSecondary}30;
+    border-radius: 8px;
+    margin: 2rem 2rem;
     
     @media (max-width: 1024px) {
         padding: 2rem 1.5rem;
