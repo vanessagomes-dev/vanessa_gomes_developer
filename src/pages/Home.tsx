@@ -248,7 +248,7 @@ const rotatingSkills = [
 
 return (
     <HeroSection>
-    {/* 1. Hello World (Posicionamento Absoluto) */}
+    {/* 1. Hello World  */}
       <HelloWorldContainer>
         <GradientText
           colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
@@ -303,7 +303,7 @@ return (
       </MainTextWrapper>
 
     {/* 3. FOTO  */}
-      <motion.div /* Container para a foto à direita */
+      <motion.div 
         style={{
           display: "flex",
           flexDirection: "column",

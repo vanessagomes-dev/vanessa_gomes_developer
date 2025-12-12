@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
+import Skills from './pages/Skills';
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
             <Route path="/" element={<Home />} /> 
             <Route path="/sobre" element={<About />} />
             <Route path="/projetos" element={<Projects />} />
-            <Route path="/skills" element={<h1>Skills</h1>} />
+            <Route path="/skills" element={<Skills />} />
             <Route path="/contato" element={<h1>Contato</h1>} />
 
             {/* Rota de fallback para 404, se necessário */}

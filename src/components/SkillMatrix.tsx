@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { skillData, type SkillCategory, type Skill } from '../data/skill'; 
+import { skillData, type SkillCategory, type Skill } from '../data/skillsData'; 
 
 // ===============================================
 // 1. ESTILIZAÇÃO
