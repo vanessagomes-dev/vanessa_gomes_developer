@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { FaBars, FaTimes, FaSun, FaMoon, FaCode } from 'react-icons/fa'; 
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { motion } from "framer-motion";
+import GradientText from "../components/GradientText";
 
 // 1. Definição da Interface de Props
 interface HeaderProps {
   toggleTheme: () => void;
-  themeMode: 'light' | 'dark';
+  themeMode: "light" | "dark";
 }
 
 // 2. Componente de Estilização Principal
@@ -16,8 +17,8 @@ const HeaderContainer = styled(motion.header)`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
-  background-color: ${props => props.theme.colors.surface};
-  border-bottom: 1px solid ${props => props.theme.colors.textSecondary}10; /* Linha sutil */
+  background-color: ${(props) => props.theme.colors.surface};
+  border-bottom: 1px solid ${(props) => props.theme.colors.textSecondary}10; /* Linha sutil */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -29,13 +30,14 @@ const HeaderContainer = styled(motion.header)`
 `;
 
 // 3. Estilos da Logo/Marca
-const Logo = styled(Link)`
+const LogoContainer = styled(motion(Link))`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   text-transform: uppercase;
+  text-decoration: none; /* Garante que não tenha underline */
 
   svg {
     margin-right: 0.5rem;
@@ -54,12 +56,12 @@ const NavMenu = styled.nav<{ isOpen: boolean }>`
     left: 0;
     flex-direction: column;
     width: 100%;
-    background-color: ${props => props.theme.colors.surface};
-    border-top: 1px solid ${props => props.theme.colors.textSecondary}20;
+    background-color: ${(props) => props.theme.colors.surface};
+    border-top: 1px solid ${(props) => props.theme.colors.textSecondary}20;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(${props => (props.isOpen ? '0' : '-100%')});
-    opacity: ${props => (props.isOpen ? '1' : '0')};
-    pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
+    transform: translateY(${(props) => (props.isOpen ? "0" : "-100%")});
+    opacity: ${(props) => (props.isOpen ? "1" : "0")};
+    pointer-events: ${(props) => (props.isOpen ? "auto" : "none")};
     transition: all 0.3s ease-in-out;
     padding: 1rem 0;
   }
@@ -67,15 +69,20 @@ const NavMenu = styled.nav<{ isOpen: boolean }>`
 
 // 5. Estilos dos Links de Navegação
 const NavLink = styled(Link)`
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  color: ${props => props.theme.colors.textSecondary};
+  padding: 0.6rem 1.2rem; /* Aumentei um pouco para o sombreado aparecer melhor */
+  margin: 0 0.2rem;
+  color: ${(props) => props.theme.colors.textSecondary};
   font-weight: 600;
-  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  border-radius: 8px; /* Bordas arredondadas para o sombreado ficar bonito */
+  transition: all 0.3s ease; /* Transição suave para todas as propriedades */
 
   &:hover {
-    color: ${props => props.theme.colors.primary};
-    transform: translateY(-2px);
+    color: ${(props) => props.theme.colors.primary};
+    transform: translateY(-3px);
+    /* Adicionando o sombreado leve solicitado */
+    background-color: ${(props) => props.theme.colors.surface};
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: 768px) {
@@ -83,7 +90,11 @@ const NavLink = styled(Link)`
     padding: 0.8rem 0;
     width: 90%;
     text-align: center;
-    border-bottom: 1px dashed ${props => props.theme.colors.textSecondary}10;
+    border-bottom: 1px dashed ${(props) => props.theme.colors.textSecondary}10;
+
+    &:hover {
+      transform: none; /* Remove o salto no mobile para não quebrar o layout */
+    }
   }
 `;
 
@@ -93,7 +104,7 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
 
   @media (max-width: 768px) {
     display: block;
@@ -102,8 +113,9 @@ const MenuButton = styled.button`
 
 // 7. Botão do Toggle de Tema
 const ThemeToggle = styled.button`
-  background: ${props => props.theme.colors.primary}15; /* Fundo transparente suave */
-  color: ${props => props.theme.colors.primary};
+  background: ${(props) =>
+    props.theme.colors.primary}15; /* Fundo transparente suave */
+  color: ${(props) => props.theme.colors.primary};
   border-radius: 50%;
   padding: 0.6rem;
   margin-left: 1rem;
@@ -113,7 +125,7 @@ const ThemeToggle = styled.button`
 
   &:hover {
     transform: scale(1.1);
-    background: ${props => props.theme.colors.primary}30;
+    background: ${(props) => props.theme.colors.primary}30;
   }
 
   @media (max-width: 768px) {
@@ -134,15 +146,20 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, themeMode }) => {
   };
 
   return (
-    <HeaderContainer 
-      initial={{ y: -100 }} 
-      animate={{ y: 0 }} 
+    <HeaderContainer
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
     >
-      {/* Logo/Marca */}
-      <Logo to="/" onClick={handleLinkClick}>
-        <FaCode /> Vanessa.dev
-      </Logo>
+      {/* --- LOGO COM ANIMAÇÃO --- */}
+      <LogoContainer>
+        <GradientText
+          colors={["#8a2be2", "#4079ff", "#40dcff87", "#8a2be2", "#4079ff"]}
+          animationSpeed={3}
+        >
+          {"</> Vanessa.dev"}
+        </GradientText>
+      </LogoContainer>
 
       {/* Botão Hambúrguer (Mobile) */}
       <MenuButton onClick={() => setIsOpen(!isOpen)}>
@@ -151,15 +168,25 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, themeMode }) => {
 
       {/* Menu de Navegação */}
       <NavMenu isOpen={isOpen}>
-        <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
-        <NavLink to="/sobre" onClick={handleLinkClick}>Sobre</NavLink>
-        <NavLink to="/projetos" onClick={handleLinkClick}>Projetos</NavLink>
-        <NavLink to="/skills" onClick={handleLinkClick}>Skills</NavLink>
-        <NavLink to="/contato" onClick={handleLinkClick}>Contato</NavLink>
+        <NavLink to="/" onClick={handleLinkClick}>
+          Home
+        </NavLink>
+        <NavLink to="/sobre" onClick={handleLinkClick}>
+          Sobre
+        </NavLink>
+        <NavLink to="/projetos" onClick={handleLinkClick}>
+          Projetos
+        </NavLink>
+        <NavLink to="/skills" onClick={handleLinkClick}>
+          Skills
+        </NavLink>
+        <NavLink to="/contato" onClick={handleLinkClick}>
+          Contato
+        </NavLink>
 
         {/* Alternador de Tema */}
         <ThemeToggle onClick={toggleTheme}>
-          {themeMode === 'light' ? <FaMoon size={20} /> : <FaSun size={20} />}
+          {themeMode === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
         </ThemeToggle>
       </NavMenu>
     </HeaderContainer>
