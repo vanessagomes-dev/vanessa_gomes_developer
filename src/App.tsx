@@ -11,7 +11,7 @@ import Header from './components/Header';
 // -- PÁGINAS
 import Home from './pages/Home';
 import About from './pages/About';
-
+import Projects from './pages/Projects';
 
 
 function App() {
@@ -42,9 +42,9 @@ function App() {
             {/* Estas serão as rotas, criar as páginas*/}
             <Route path="/" element={<Home />} /> 
             <Route path="/sobre" element={<About />} />
-            <Route path="/projects" element={<h1>Projetos</h1>} />
+            <Route path="/projetos" element={<Projects />} />
             <Route path="/skills" element={<h1>Skills</h1>} />
-            <Route path="/contact" element={<h1>Contato</h1>} />
+            <Route path="/contato" element={<h1>Contato</h1>} />
 
             {/* Rota de fallback para 404, se necessário */}
             {/* <Route path="*" element={<NotFound />} /> */}

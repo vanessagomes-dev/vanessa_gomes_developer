@@ -151,11 +151,11 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, themeMode }) => {
 
       {/* Menu de Navegação */}
       <NavMenu isOpen={isOpen}>
-        <NavLink to="/" onClick={handleLinkClick}>Capa</NavLink>
+        <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
         <NavLink to="/sobre" onClick={handleLinkClick}>Sobre</NavLink>
-        <NavLink to="/projects" onClick={handleLinkClick}>Projetos</NavLink>
+        <NavLink to="/projetos" onClick={handleLinkClick}>Projetos</NavLink>
         <NavLink to="/skills" onClick={handleLinkClick}>Skills</NavLink>
-        <NavLink to="/contact" onClick={handleLinkClick}>Contato</NavLink>
+        <NavLink to="/contato" onClick={handleLinkClick}>Contato</NavLink>
 
         {/* Alternador de Tema */}
         <ThemeToggle onClick={toggleTheme}>
