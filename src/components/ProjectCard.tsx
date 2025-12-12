@@ -34,7 +34,6 @@ const CardContainer = styled(motion.div)`
     }
 `;
 
-// AQUI ESTAVA O ERRO: Faltava esta definição abaixo
 const ImagePlaceholder = styled.div`
     width: 100%;
     height: 180px;
