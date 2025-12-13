@@ -269,7 +269,7 @@ const Home: React.FC = () => {
           </ContactButton>
 
           <CVButton
-            href="/assets/curriculo_vanessa.pdf"
+            href="/assets/cv-vanessa.pdf"
             download
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
