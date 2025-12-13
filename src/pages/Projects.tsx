@@ -49,10 +49,10 @@ const ProjectsGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: flex-start; /* Alinha os cards à esquerda */
+    justify-content: flex-start; 
     
     @media (max-width: 768px) {
-        justify-content: center; /* Centraliza em mobile */
+        justify-content: center; 
     }
 `;
 

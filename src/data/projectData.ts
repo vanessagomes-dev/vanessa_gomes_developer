@@ -20,7 +20,7 @@ export interface Project {
 export const projectData: Project[] = [
     // --- FRONT-END ---
     {
-        title: "Dashboard J",
+        title: "Dashboard",
         category: "Front-end",
         description: "Dashboard moderno desenvolvido com Next.js, TailwindCSS e Radix UI, com componentes totalmente customizados, animações fluidas e interface responsiva. Um projeto focado em arquitetura limpa, acessibilidade e experiência do usuário.",
         techIcons: [
@@ -29,7 +29,8 @@ export const projectData: Project[] = [
             { icon: SiRadixui, name: 'Radix UI' },
             { icon: SiTypescript, name: 'TypeScript' },
         ],
-        repoLink: 'https://github.com/vanessagomes-dev/dashboard-j', // URL de Exemplo, ajuste se necessário
+        repoLink: 'https://github.com/vanessagomes-dev/dashboard_tailwind', 
+        image: "/public/dashboard.png" 
     },
     {
         title: "Sistema de Reembolso",
@@ -41,6 +42,7 @@ export const projectData: Project[] = [
             { icon: SiTypescript, name: 'TypeScript' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/sistema-de-reembolso",
+        image: "/public/reembolso.png"
     },
     {
         title: "App Hair Day",
@@ -52,6 +54,7 @@ export const projectData: Project[] = [
             { icon: FaCss3Alt, name: 'CSS3' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/hairday-app",
+        image: "/public/app-hair-day.png"
     },
 
     // --- BACK-END ---
@@ -64,6 +67,7 @@ export const projectData: Project[] = [
             { icon: SiJavascript, name: 'JavaScript' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/suporte-tickets",
+        // image: "/public/suporte-tickets"
     },
     {
         title: "TwBot - Chatbot Inteligente",
@@ -74,6 +78,7 @@ export const projectData: Project[] = [
             { icon: FaPython, name: 'Tkinter' }, 
         ],
         repoLink: "https://github.com/vanessagomes-dev/twbot",
+        image: "/public/chatboot.png"
     },
     {
         title: "API Flask (Estudos)",
@@ -84,6 +89,7 @@ export const projectData: Project[] = [
             { icon: SiFlask, name: 'Flask' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/projeto_api....",
+        image: "public/api-flask.png"
     },
 
     // --- FULL STACK ---
@@ -98,6 +104,7 @@ export const projectData: Project[] = [
             { icon: FaReact, name: 'RBAC' }, 
         ],
         repoLink: "https://github.com/vanessagomes-dev/Saas-Next-RBAC",
+        // image:"/public/saas-next.png"
     },
     {
         title: "Lista de Tarefas (MERN Stack)",
@@ -110,6 +117,7 @@ export const projectData: Project[] = [
             { icon: SiJavascript, name: 'JavaScript' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/todo-list",
+        image: "public/todolist.png"
     },
     {
         title: "Library Management",
@@ -122,6 +130,7 @@ export const projectData: Project[] = [
             { icon: SiAngular, name: 'Angular' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/library-management",
+        // image: "/public/library.png"
     },
 ];
 
