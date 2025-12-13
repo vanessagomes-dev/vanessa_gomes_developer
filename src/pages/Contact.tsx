@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,7 +16,7 @@ import {
 // 1. ESTILIZAÇÃO (STYLED COMPONENTS)
 // ===============================================
 
-// container para envolver toda a página 
+// container para envolver toda a página
 const ContactPageWrapper = styled(motion.section)`
   padding: 4rem 6rem;
   min-height: 100vh;
@@ -272,16 +273,39 @@ const Contact: React.FC = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (validate()) {
-      // Em uma aplicação real, aqui você faria a chamada à API (e.g., Axios.post)
-      console.log("Formulário Enviado:", formData);
-      setShowModal(true);
-      setFormData({ name: "", email: "", message: "" }); // Limpa formulário
+      try {
+        // Configuração da chamada à API
+        const response = await axios.post(
+          "http://localhost:5000/send-email",
+          formData
+        );
+
+        if (response.data.success) {
+          console.log("Resposta da API:", response.data.message);
+
+          // Sucesso!
+          setShowModal(true);
+          setFormData({ name: "", email: "", message: "" }); 
+          setErrors({}); 
+        } else {
+          // Se a API retornar sucesso=false (ex: erro de Nodemailer)
+          alert("Erro no envio: " + response.data.message);
+          console.error("Erro na API:", response.data.message);
+        }
+      } catch (error) {
+        // Erro de conexão (ex: servidor Node offline) ou erro 500
+        console.error("Erro ao conectar com a API:", error);
+        alert("Erro de conexão ou servidor. Tente novamente mais tarde.");
+      }
+    } else {
+      console.log("Formulário inválido. Corrija os erros.");
     }
   };
-
+  
   return (
     <ContactPageWrapper
       initial={{ opacity: 0 }}
