@@ -45,7 +45,7 @@ const LogoContainer = styled(motion(Link))`
 `;
 
 // 4. Estilos do Menu de Navegação (Desktop)
-const NavMenu = styled.nav<{ isOpen: boolean }>`
+const NavMenu = styled.nav<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
 
@@ -59,9 +59,9 @@ const NavMenu = styled.nav<{ isOpen: boolean }>`
     background-color: ${(props) => props.theme.colors.surface};
     border-top: 1px solid ${(props) => props.theme.colors.textSecondary}20;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(${(props) => (props.isOpen ? "0" : "-100%")});
-    opacity: ${(props) => (props.isOpen ? "1" : "0")};
-    pointer-events: ${(props) => (props.isOpen ? "auto" : "none")};
+    transform: translateY(${(props) => (props.$isOpen ? "0" : "-100%")});
+    opacity: ${(props) => (props.$isOpen ? "1" : "0")};
+    pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
     transition: all 0.3s ease-in-out;
     padding: 1rem 0;
   }
@@ -134,7 +134,6 @@ const ThemeToggle = styled.button`
     padding: 0.8rem;
   }
 `;
-// src/components/Header.tsx (Continuação)
 
 const Header: React.FC<HeaderProps> = ({ toggleTheme, themeMode }) => {
   // Estado para controlar a abertura/fechamento do menu mobile
@@ -167,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, themeMode }) => {
       </MenuButton>
 
       {/* Menu de Navegação */}
-      <NavMenu isOpen={isOpen}>
+      <NavMenu $isOpen={isOpen}>
         <NavLink to="/" onClick={handleLinkClick}>
           Home
         </NavLink>
