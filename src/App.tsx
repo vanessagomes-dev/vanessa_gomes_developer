@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // -- COMPONENTES 
 import Header from './components/Header';
+import { Analytics } from '@vercel/analytics/next';
 
 // -- PÁGINAS
 import Home from './pages/Home';
@@ -33,28 +34,26 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <><ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
         {/* Renderiza o Header e passa as props de tema */}
-        <Header toggleTheme={toggleTheme} themeMode={themeMode} /> 
-        
+        <Header toggleTheme={toggleTheme} themeMode={themeMode} />
+
         <main>
           <Routes>
-            {/* Estas serão as rotas, criar as páginas*/}
-            <Route path="/" element={<Home />} /> 
+            <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<About />} />
             <Route path="/projetos" element={<Projects />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/contato" element={<Contact />} />
-
-            {/* Rota de fallback para 404, se necessário */}
-            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
 
       </Router>
     </ThemeProvider>
+    <Analytics />
+    </>
   );
 }
 
