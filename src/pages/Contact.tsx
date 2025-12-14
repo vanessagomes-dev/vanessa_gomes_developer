@@ -26,6 +26,12 @@ const ContactPageWrapper = styled(motion.section)`
 
   @media (max-width: 1024px) {
     padding: 2rem 1.5rem;
+    margin: 1rem 1rem; // Ajuste para margem lateral menor
+  }
+
+  @media (max-width: 500px) {
+    padding: 1.5rem 0.5rem; // Padding muito pequeno
+    margin: 0.5rem; // Margem bem pequena
   }
 `;
 
@@ -91,6 +97,7 @@ const InfoSection = styled.div`
 
   @media (max-width: 600px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 `;
 
@@ -131,6 +138,10 @@ const ContactCard = styled(motion.a)`
   &:hover {
     border-color: ${(props) => props.theme.colors.primary};
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+    
+  @media (max-width: 600px) {
+    width: 100%; 
   }
 `;
 
@@ -289,8 +300,8 @@ const Contact: React.FC = () => {
 
           // Sucesso!
           setShowModal(true);
-          setFormData({ name: "", email: "", message: "" }); 
-          setErrors({}); 
+          setFormData({ name: "", email: "", message: "" });
+          setErrors({});
         } else {
           // Se a API retornar sucesso=false (ex: erro de Nodemailer)
           alert("Erro no envio: " + response.data.message);
@@ -305,7 +316,7 @@ const Contact: React.FC = () => {
       console.log("Formulário inválido. Corrija os erros.");
     }
   };
-  
+
   return (
     <ContactPageWrapper
       initial={{ opacity: 0 }}

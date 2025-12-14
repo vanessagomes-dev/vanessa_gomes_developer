@@ -32,7 +32,11 @@ const HeroSection = styled.section`
     padding: 2rem 1rem;
     margin: 1rem 1rem;
     text-align: center;
-    align-items: center; /* Volta a centralizar no mobile */
+    align-items: center;
+  }
+  @media (min-width: 1600px) {
+    padding: 6rem 4rem;
+    margin: 4rem 4rem;
   }
 `;
 
@@ -45,7 +49,7 @@ const MainTextWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   text-align: left;
-  max-width: 500px;
+  
   z-index: 10;
 
   @media (max-width: 1024px) {
@@ -57,9 +61,39 @@ const MainTextWrapper = styled(motion.div)`
     padding-top: 1rem;
     margin-bottom: 3rem;
   }
+  @media (min-width: 1600px) {
+    top: 8rem;
+    left: 8rem;
+    max-width: 9000px;
+  }
 `;
 
-// Estilização para Foto 
+// Wrapper para a Foto de Perfil 
+const PhotoWrapper = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+
+  /* Posicionamento padrão para Desktop */
+  position: absolute;
+  right: 8rem;
+  top: 3rem;
+
+  @media (max-width: 1024px) {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 1600px) {
+    right: 12rem;
+    top: 6rem;
+  }
+`;
+
+// Estilização para Foto
 const ProfileImage = styled(motion.div)`
   width: 400px;
   height: 400px;
@@ -70,13 +104,29 @@ const ProfileImage = styled(motion.div)`
   margin-top: 0;
   z-index: 15;
   cursor: pointer;
-  border: 5px solid ${(props) => props.theme.colors.primary}; 
-  transition: all 0.3s ease; 
+  border: 5px solid ${(props) => props.theme.colors.primary};
+  transition: all 0.3s ease;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    width: 350px;
+    height: 350px;
+  }
+
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+  }
+
+  @media (min-width: 1600px) {
+    width: 500px;
+    height: 500px;
+    border-width: 8px; 
   }
 `;
 
@@ -94,7 +144,7 @@ const Title = styled(motion.h1)`
   display: flex;
   flex-direction: column;
 
-  /* Estilo da primeira linha: Mais suave */
+  /* Estilo da primeira linha*/
   .title-line-1 {
     font-family: "Montserrat", sans-serif;
     font-style: italic;
@@ -109,20 +159,30 @@ const Title = styled(motion.h1)`
     font-size: 5rem;
     font-weight: 800;
     color: ${(props) => props.theme.colors.primary};
-    line-height: 2.2;
+    line-height: 1.2;
   }
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
     text-align: center;
+    .title-line-2 {
+      font-size: 3.5rem;
+      line-height: 1.5;
+    }
   }
-  /* Ajuste para mobile */
-  .title-line-2 {
-    font-size: 3.5rem;
+
+  @media (min-width: 1600px) {
+    .title-line-1 {
+      font-size: 2.2rem;
+    }
+    .title-line-2 {
+      font-size: 6rem;
+      line-height: 1.5;
+    }
   }
 `;
 
-// Estilização do Subtítulo (Container)
+// Estilização do Subtítulo 
 const Subtitle = styled(motion.h2)`
   font-size: 1.8rem;
   font-weight: 500;
@@ -279,28 +339,15 @@ const Home: React.FC = () => {
         </CTAButtons>
       </MainTextWrapper>
 
-      {/* FOTO  Interativa */}
-      <motion.div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          position: "absolute",
-          right: "8rem",
-          top: "3rem",
-          zIndex: 10,
-        }}
+      <PhotoWrapper
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
       >
-        <ProfileImage
-          whileHover={{ scale: 1.05 }} 
-          onClick={handlePhotoClick}
-        >
-          <img src="/public/perfil-vanessa.jpeg" alt="foto vanessa" />
+        <ProfileImage whileHover={{ scale: 1.05 }} onClick={handlePhotoClick}>
+          <img src="/perfil-vanessa.jpeg" alt="foto vanessa" />
         </ProfileImage>
-      </motion.div>
+      </PhotoWrapper>
     </HeroSection>
   );
 };
