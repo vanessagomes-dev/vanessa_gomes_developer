@@ -280,6 +280,11 @@ const Home: React.FC = () => {
   // Definir a função de clique
   const handlePhotoClick = () => {
     navigate("/sobre");
+    };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault(); 
+    navigate("/contato");
   };
 
   // Lista de tecnologias para o RotatingText
@@ -322,6 +327,7 @@ const Home: React.FC = () => {
         <CTAButtons>
           <ContactButton
             href="/contato"
+            onClick={handleContactClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -329,7 +335,7 @@ const Home: React.FC = () => {
           </ContactButton>
 
           <CVButton
-            href="/assets/cv-vanessa.pdf"
+            href="/cv-vanessa.pdf"
             download
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
