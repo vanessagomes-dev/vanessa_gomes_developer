@@ -139,9 +139,9 @@ const ContactCard = styled(motion.a)`
     border-color: ${(props) => props.theme.colors.primary};
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
-    
+
   @media (max-width: 600px) {
-    width: 100%; 
+    width: 100%;
   }
 `;
 
@@ -289,9 +289,15 @@ const Contact: React.FC = () => {
 
     if (validate()) {
       try {
-        // Configuração da chamada à API
+        // 1. Define a URL base para a API:
+        // - Em Produção (Vercel), usa o valor da variável VITE_API_URL.
+        // - Em Desenvolvimento, usa 'http://localhost:5000' como fallback.
+        // CORREÇÃO: Usar string para o fallback de localhost.
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+        // 2. Configuração da chamada à API
         const response = await axios.post(
-          "http://localhost:5000/send-email",
+          `${apiUrl}/send-email`, // Concatena a URL base e o endpoint
           formData
         );
 
