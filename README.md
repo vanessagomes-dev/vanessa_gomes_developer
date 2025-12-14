@@ -3,9 +3,7 @@
 <p align="center">
   <a href="https://vanessa-gomes-portifolio.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Status-Online-2ecc71?style=for-the-badge&logo=vercel" alt="Status do Deploy Vercel"/>
-  </a>
-  <img src="https://img.shields.io/badge/Versão-2.0.0-9b59b6?style=for-the-badge" alt="Versão do Projeto"/>
-</p>
+  
 
 ## Tecnologias Utilizadas
 
@@ -23,10 +21,10 @@
 
 ## Preview do Projeto
 
-```markdown
-<p align="center">
-  <img src="./public/portifolio-vercel.png" alt="Preview Visual do Portfólio de Vanessa Gomes" width="800"/>
-</p>
+  <img src="/public/portifolio-vercel.png" alt="Versão do Projeto"/>
+
+
+---
 
 ## Sobre o Projeto
 Este é o portfólio profissional de Vanessa Gomes, Desenvolvedora Full Stack com foco em arquitetura moderna e experiência do usuário.
@@ -82,10 +80,10 @@ pnpm (Recomendado) ou npm
 
 1. Clonar o Repositório
 
-´´´´
-git clone [https://github.com/vanessagomes-dev/vanessa_gomes_desenvolvedora.git](https://github.com/vanessagomes-dev/vanessa_gomes_desenvolvedora.git)
-cd vanessa_gomes_desenvolvedora
-´´´´
+````
+git clone https://github.com/vanessagomes-dev/vanessa_gomes_desenvolvedora.git
+
+````
 
 2. Instalar Dependências
 
@@ -98,30 +96,29 @@ npm install
 3. Executar o Projeto
 Inicia o servidor de desenvolvimento do Vite com Hot Module Replacement (HMR):
 
-´´´´
+````
 pnpm dev
 # ou
 npm run dev
-´´´´
+````
 O projeto estará acessível em http://localhost:5173/ (ou outra porta disponível).
 
 4. Build para Produção
 Cria o bundle otimizado na pasta dist/:
 
-´´´´
+````
 pnpm build
 # ou
 npm run build
-´´´´
+````
 
-## 🔗 Conecte-se com a Desenvolvedora
+## 🔗 Conecte-se com a Desenvolvedora 
 
-Plataforma,Link
-LinkedIn,https://linkedin.com/in/vanessagomesdev
-GitHub,https://github.com/vanessagomes-dev
-E-mail,vanessagomesdev@gmail.com
+<p>LinkedIn,https://linkedin.com/in/vanessagomesdev</p>
+<p>GitHub,https://github.com/vanessagomes-dev</p>
+<p>E-mail,vanessagomesdev@gmail.com</p>
 
-
+---
 
 # React + TypeScript + Vite
 
