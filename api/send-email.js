@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 // Carrega variáveis de ambiente do arquivo .env
-dotenv.config();
+// dotenv.config();
 
 const app = express();
  
