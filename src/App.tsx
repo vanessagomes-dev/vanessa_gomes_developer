@@ -7,7 +7,6 @@ import { Routes, Route } from 'react-router-dom';
 
 // -- COMPONENTES 
 import Header from './components/Header';
-import { Analytics } from '@vercel/analytics/next';
 
 // -- PÁGINAS
 import Home from './pages/Home';
@@ -34,10 +33,10 @@ function App() {
   };
 
   return (
-    <><ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        {/* Renderiza o Header e passa as props de tema */}
+
         <Header toggleTheme={toggleTheme} themeMode={themeMode} />
 
         <main>
@@ -52,8 +51,7 @@ function App() {
 
       </Router>
     </ThemeProvider>
-    <Analytics />
-    </>
+    
   );
 }
 
