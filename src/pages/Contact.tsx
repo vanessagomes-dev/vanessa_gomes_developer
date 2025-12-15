@@ -289,15 +289,12 @@ const Contact: React.FC = () => {
 
     if (validate()) {
       try {
-        // 1. Define a URL base para a API:
-        // - Em Produção (Vercel), usa o valor da variável VITE_API_URL.
-        // - Em Desenvolvimento, usa 'http://localhost:5000' como fallback.
-        // CORREÇÃO: Usar string para o fallback de localhost.
+       
         const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-        // 2. Configuração da chamada à API
+        // Configuração da chamada à API
         const response = await axios.post(
-          `${apiUrl}/send-email`, // Concatena a URL base e o endpoint
+          `${apiUrl}/api/send-email`, 
           formData
         );
 

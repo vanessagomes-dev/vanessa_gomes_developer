@@ -7,11 +7,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const PORT = 5000; 
-
+ 
 // Middlewares
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: '*', 
     methods: 'GET,POST',
 }));
 app.use(express.json());
@@ -30,7 +29,7 @@ const transporter = nodemailer.createTransport({
 // ----------------------------------------------------
 // 2. Rota de Envio do Formulário
 // ----------------------------------------------------
-app.post('/send-email', async (req, res) => {
+app.post('/', async (req, res) => {
     const { name, email, message } = req.body;
     
     // Validação básica do backend (melhoria de segurança)
@@ -63,8 +62,6 @@ app.post('/send-email', async (req, res) => {
 });
 
 // ----------------------------------------------------
-// 3. Inicialização
+// 3. Exportar o handler
 // ----------------------------------------------------
-app.listen(PORT, () => {
-    console.log(`API de Contato rodando em http://localhost:${PORT}`);
-});
+module.exports = app;
