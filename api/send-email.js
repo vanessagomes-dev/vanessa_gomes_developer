@@ -1,7 +1,6 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import nodemailer from 'nodemailer';
+import cors from 'cors';
 
 // Carrega variáveis de ambiente do arquivo .env
 // dotenv.config();
@@ -64,4 +63,4 @@ app.post('/', async (req, res) => {
 // ----------------------------------------------------
 // 3. Exportar o handler
 // ----------------------------------------------------
-module.exports = app;
+export default app;
