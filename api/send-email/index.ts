@@ -1,9 +1,7 @@
-import express from 'express';
+import * as express from 'express';
+import { Request, Response } from 'express'; 
 import nodemailer from 'nodemailer';
-import cors from 'cors';
-
-// Carrega variáveis de ambiente do arquivo .env
-// dotenv.config();
+import * as cors from 'cors'; 
 
 const app = express();
  
@@ -28,11 +26,11 @@ const transporter = nodemailer.createTransport({
 // ----------------------------------------------------
 // 2. Rota de Envio do Formulário
 // ----------------------------------------------------
-app.post('/', async (req, res) => {
+
+app.post('/', async (req: Request, res: Response) => {
     const { name, email, message } = req.body;
     
-    // Validação básica do backend (melhoria de segurança)
-    if (!name || !email || !message) {
+      if (!name || !email || !message) {
         return res.status(400).json({ success: false, message: 'Dados incompletos.' });
     }
 
