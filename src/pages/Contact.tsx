@@ -292,8 +292,8 @@ const Contact: React.FC = () => {
       // 1. Usa o padrão do Vite: import.meta.env
       const endpoint =
         import.meta.env.PROD // VITE usa import.meta.env.PROD para checar produção
-          ? "/api/send-email.cjs" // Caminho relativo, funciona na Vercel (mesmo domínio)
-          : "http://localhost:5000/api/send-email.cjs"; // Caminho absoluto para desenvolvimento
+          ? "/api/send-email" // Caminho relativo, funciona na Vercel (mesmo domínio)
+          : "http://localhost:5000/api/send-email"; // Caminho absoluto para desenvolvimento
 
       const response = await axios.post(endpoint, formData);
 
