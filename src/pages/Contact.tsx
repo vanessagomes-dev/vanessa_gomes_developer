@@ -285,18 +285,17 @@ const Contact: React.FC = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (validate()) {
-      try {
-       
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  if (validate()) {
+    try {
+      // 1. Usa o padrão do Vite: import.meta.env
+      const endpoint =
+        import.meta.env.PROD // VITE usa import.meta.env.PROD para checar produção
+          ? "/api/send-email" // Caminho relativo, funciona na Vercel (mesmo domínio)
+          : "http://localhost:5000/api/send-email"; // Caminho absoluto para desenvolvimento
 
-        // Configuração da chamada à API
-        const response = await axios.post(
-          `${apiUrl}/api/send-email`, 
-          formData
-        );
+      const response = await axios.post(endpoint, formData);
 
         if (response.data.success) {
           console.log("Resposta da API:", response.data.message);
