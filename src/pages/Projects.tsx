@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import { groupedProjects, type Project } from '../data/projectData';
+import { projectData } from '../data/projectData';
 
-// ===============================================
-// 1. ESTILIZAÇÃO DA PÁGINA
-// ===============================================
+// --- ESTILIZAÇÃO ---
 
 const ProjectsContainer = styled(motion.section)`
     min-height: 100vh; 
     padding: 4rem 6rem;
-    border: 1px solid ${(props) => props.theme.colors.textSecondary}30;
-    border-radius: 8px;
     margin: 2rem 2rem;
     
     @media (max-width: 1024px) {
@@ -24,7 +20,7 @@ const PageTitle = styled.h1`
     font-size: 3rem;
     font-weight: 700;
     color: ${(props) => props.theme.colors.secondary};
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
     
     span {
@@ -32,35 +28,61 @@ const PageTitle = styled.h1`
     }
 `;
 
-const CategorySection = styled.div`
-    margin-bottom: 4rem;
-`;
-
-const CategoryTitle = styled.h2`
-    font-size: 2rem;
-    font-weight: 600;
-    color: ${(props) => props.theme.colors.textSecondary};
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid ${(props) => props.theme.colors.textSecondary}30;
-`;
-
-const ProjectsGrid = styled.div`
+const FilterContainer = styled.div`
     display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
     flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: flex-start; 
-    
-    @media (max-width: 768px) {
-        justify-content: center; 
+`;
+
+const FilterButton = styled.button<{ $active: boolean }>`
+    padding: 0.6rem 1.8rem;
+    border-radius: 50px;
+    border: 2px solid ${(props) => props.theme.colors.primary};
+    background: ${(props) => (props.$active ? props.theme.colors.primary : 'transparent')};
+    color: ${(props) => (props.$active ? '#fff' : props.theme.colors.primary)};
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: ${(props) => (props.$active ? `0 4px 15px ${props.theme.colors.primary}60` : 'none')};
+
+    &:hover {
+        transform: translateY(-3px);
+        background: ${(props) => props.theme.colors.primary};
+        color: #fff;
     }
 `;
 
-// ===============================================
-// 2. COMPONENTE FUNCIONAL
-// ===============================================
+const ProjectsGrid = styled(motion.div)`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+`;
+
+// --- COMPONENTE ---
 
 const Projects: React.FC = () => {
+    const [filter, setFilter] = useState('Todos');
+
+    // Extrai as categorias dinamicamente do seu projectData
+    const categories = useMemo(() => {
+        const cats = projectData.map(p => p.category);
+        return ['Todos', ...Array.from(new Set(cats))];
+    }, []);
+
+    // Filtra os projetos
+    const filteredProjects = useMemo(() => {
+        if (filter === 'Todos') return projectData;
+        return projectData.filter(project => project.category === filter);
+    }, [filter]);
+
     return (
         <ProjectsContainer
             initial={{ opacity: 0 }}
@@ -69,20 +91,36 @@ const Projects: React.FC = () => {
         >
             <PageTitle>Meus <span>Projetos</span></PageTitle>
 
-            {/* Mapeia as categorias e renderiza a seção correspondente */}
-            {Object.keys(groupedProjects).map((category) => (
-                <CategorySection key={category}>
-                    <CategoryTitle>{category}</CategoryTitle>
-                    <ProjectsGrid>
-                        {groupedProjects[category as keyof typeof groupedProjects].map((project: Project, index: number) => (
-                            <ProjectCard 
-                                key={index} 
-                                project={project} 
-                            />
-                        ))}
-                    </ProjectsGrid>
-                </CategorySection>
-            ))}
+            {/* Barra de Filtros Dinâmica */}
+            <FilterContainer>
+                {categories.map(cat => (
+                    <FilterButton 
+                        key={cat}
+                        $active={filter === cat}
+                        onClick={() => setFilter(cat)}
+                    >
+                        {cat}
+                    </FilterButton>
+                ))}
+            </FilterContainer>
+
+            {/* Grid com animação de reposicionamento (layout) */}
+            <ProjectsGrid layout>
+                <AnimatePresence mode="popLayout">
+                    {filteredProjects.map((project) => (
+                        <motion.div
+                            key={project.title} // Usando title como chave única
+                            layout
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.4 }}
+                        >
+                            <ProjectCard project={project} />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </ProjectsGrid>
         </ProjectsContainer>
     );
 };

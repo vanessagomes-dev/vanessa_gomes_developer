@@ -2,27 +2,24 @@ import type { IconType } from 'react-icons';
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaPython } from 'react-icons/fa';
 import { SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss, SiRadixui, SiMongodb, SiExpress, SiEjs, SiNestjs, SiAngular, SiFlask, SiSqlite } from 'react-icons/si';
 
-// Tipagem do Projeto
+// 1. Tipagem do Projeto
 export interface Project {
     title: string;
-    category: 'Front-end' | 'Back-end' | 'Full Stack';
+    category: 'Front-end' | 'Back-end' | 'Full Stack'; // Nomes exatos para os filtros
     description: string;
     techIcons: { icon: IconType; name: string }[];
     liveDemoLink?: string;
     repoLink: string;
-    image?: string; // Para futuras miniaturas
+    image?: string;
 }
 
-// ===============================================
-// DADOS DOS PROJETOS
-// ===============================================
-
+// 2. Array Único de Projetos (Essencial para o Filtro Dinâmico)
 export const projectData: Project[] = [
     // --- FRONT-END ---
     {
         title: "Dashboard",
         category: "Front-end",
-        description: "Dashboard moderno desenvolvido com Next.js, TailwindCSS e Radix UI, com componentes totalmente customizados, animações fluidas e interface responsiva. Um projeto focado em arquitetura limpa, acessibilidade e experiência do usuário.",
+        description: "Dashboard moderno desenvolvido com Next.js, TailwindCSS e Radix UI, com componentes totalmente customizados.",
         techIcons: [
             { icon: SiNextdotjs, name: 'Next.js' },
             { icon: SiTailwindcss, name: 'Tailwind' },
@@ -47,7 +44,7 @@ export const projectData: Project[] = [
     {
         title: "App Hair Day",
         category: "Front-end",
-        description: "Aplicação web de agendamentos para salão desenvolvida em JavaScript puro, explorando lógica de programação, DOM, eventos, callbacks, Promises, async/await, classes, módulos e consumo de APIs. Projeto focado em fundamentos da linguagem antes do uso de frameworks.",
+        description: "Aplicação web de agendamentos para salão desenvolvida em JavaScript puro, explorando lógica de programação e DOM.",
         techIcons: [
             { icon: SiJavascript, name: 'JavaScript' },
             { icon: FaHtml5, name: 'HTML5' },
@@ -61,21 +58,19 @@ export const projectData: Project[] = [
     {
         title: "Suporte de Tickets (API)",
         category: "Back-end",
-        description: "API desenvolvida com Node.js para gerenciar tickets de suporte técnico, permitindo criar, atualizar (informações e status) e listar tickets com filtros por status.",
+        description: "API desenvolvida com Node.js para gerenciar tickets de suporte técnico, permitindo criar, atualizar e listar tickets.",
         techIcons: [
             { icon: FaNodeJs, name: 'Node.js' },
             { icon: SiJavascript, name: 'JavaScript' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/suporte-tickets",
-        // image: "/suporte-tickets"
     },
     {
         title: "TwBot - Chatbot Inteligente",
         category: "Back-end",
-        description: "Chatbot inteligente desenvolvido em Python, projetado para responder perguntas, realizar tarefas básicas e interagir com usuários, utilizando PNL (Processamento de Linguagem Natural). Inclui interface gráfica simples com Tkinter.",
+        description: "Chatbot inteligente desenvolvido em Python utilizando PNL (Processamento de Linguagem Natural).",
         techIcons: [
             { icon: FaPython, name: 'Python' },
-            { icon: FaPython, name: 'Tkinter' }, 
         ],
         repoLink: "https://github.com/vanessagomes-dev/twbot",
         image: "/chatboot.PNG"
@@ -88,7 +83,7 @@ export const projectData: Project[] = [
             { icon: FaPython, name: 'Python' },
             { icon: SiFlask, name: 'Flask' },
         ],
-        repoLink: "https://github.com/vanessagomes-dev/projeto_api....",
+        repoLink: "https://github.com/vanessagomes-dev/projeto_api",
         image: "/api-flask.png"
     },
 
@@ -96,20 +91,17 @@ export const projectData: Project[] = [
     {
         title: "SaaS Multi-Tenant (RBAC)",
         category: "Full Stack",
-        description: "Projeto contendo todo o código necessário para configurar um SaaS multi-tenant com Next.js, incluindo autenticação e autorização RBAC (Role-Based Access Control).",
+        description: "Configuração de um SaaS multi-tenant com Next.js, incluindo autenticação e autorização RBAC.",
         techIcons: [
             { icon: SiNextdotjs, name: 'Next.js' },
-            { icon: SiJavascript, name: 'JavaScript' },
             { icon: SiTypescript, name: 'TypeScript' },
-            { icon: FaReact, name: 'RBAC' }, 
         ],
         repoLink: "https://github.com/vanessagomes-dev/Saas-Next-RBAC",
-        // image:"/saas-next.png"
     },
     {
         title: "Lista de Tarefas (MERN Stack)",
         category: "Full Stack",
-        description: "Lista de tarefas desenvolvido com Express, MongoDB e EJS. O objetivo é permitir que os usuários criem, visualizem, completem e removam tarefas de forma simples e intuitiva, com um design responsivo.",
+        description: "Lista de tarefas desenvolvido com Express, MongoDB e EJS. Foco em operações CRUD.",
         techIcons: [
             { icon: SiMongodb, name: 'MongoDB' },
             { icon: SiExpress, name: 'Express' },
@@ -122,19 +114,17 @@ export const projectData: Project[] = [
     {
         title: "Library Management",
         category: "Full Stack",
-        description: "Aplicação desenvolvida para teste prático com NestJS e Angular, utilizando SQLite para gerenciamento de biblioteca.",
+        description: "Aplicação desenvolvida para teste prático com NestJS e Angular, utilizando SQLite.",
         techIcons: [
             { icon: SiSqlite, name: 'SQLite' },
             { icon: SiNestjs, name: 'NestJS' },
-            { icon: SiTypescript, name: 'TypeScript' },
             { icon: SiAngular, name: 'Angular' },
         ],
         repoLink: "https://github.com/vanessagomes-dev/library-management",
-        // image: "/library.png"
     },
 ];
 
-// Função utilitária para agrupar os projetos por categoria
+// Opcional: Mantemos o agrupamento apenas se você usá-lo em algum outro lugar do site
 export const groupedProjects = projectData.reduce((acc, project) => {
     if (!acc[project.category]) {
         acc[project.category] = [];

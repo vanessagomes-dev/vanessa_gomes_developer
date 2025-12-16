@@ -4,32 +4,21 @@ import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import type { Project } from "../data/projectData";
 
-// ===============================================
-// 1. ESTILIZAÇÃO (COMPONENTES DE ESTILO)
-// ===============================================
+// --- ESTILIZAÇÃO ---
 
-const CardContainer = styled(motion.div)`
+const CardContainer = styled(motion.create("div"))`
   background-color: ${(props) => props.theme.colors.surface};
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra inicial bem leve */
   padding: 1.5rem;
-  flex: 1 1 calc(33.333% - 2rem);
-  min-width: 300px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: box-shadow 0.3s ease;
+  height: 100%;
+  border: 1px solid ${(props) => props.theme.colors.textSecondary}10;
 
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 1024px) {
-    flex: 1 1 calc(50% - 1rem);
-  }
   @media (max-width: 768px) {
-    flex: 1 1 100%;
     min-width: unset;
   }
 `;
@@ -39,7 +28,6 @@ const ImagePlaceholder = styled.div`
   height: 180px;
   background-color: ${(props) => props.theme.colors.textSecondary}20;
   border-radius: 8px;
-  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,6 +46,20 @@ const ImagePlaceholder = styled.div`
   }
 `;
 
+const CategoryBadge = styled.span`
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: ${(props) => props.theme.colors.primary}15;
+  color: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.primary}30;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+`;
+
 const ProjectTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 700;
@@ -67,7 +69,6 @@ const ProjectTitle = styled.h3`
   min-height: 40px;
 `;
 
-// Styled Component para aplicar o link na Imagem e Título
 const TitleLinkWrapper = styled.a`
   text-decoration: none;
   color: inherit;
@@ -85,6 +86,12 @@ const ProjectDescription = styled.p`
   color: ${(props) => props.theme.colors.textSecondary};
   margin-bottom: 1.5rem;
   flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Número de linhas que você quer exibir */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4.2rem; /* Garante que mesmo descrições curtas ocupem o mesmo espaço */
 `;
 
 const TechIconsContainer = styled.div`
@@ -137,9 +144,7 @@ const RepoButton = styled(ActionButton)`
   }
 `;
 
-// ===============================================
-// 2. COMPONENTE FUNCIONAL
-// ===============================================
+// --- COMPONENTE ---
 
 interface ProjectCardProps {
   project: Project;
@@ -148,33 +153,39 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <CardContainer
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{
+        y: -10,
+        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)",
+      }}
+      transition={{
+        type: "tween",
+        ease: "easeOut",
+        duration: 0.3,
+      }}
     >
-      {/*Link que engloba a Imagem e o Título */}
       <TitleLinkWrapper
         href={project.repoLink}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {/* Imagem/Placeholder */}
         <ImagePlaceholder>
           {project.image ? (
-            <img src={project.image} alt={project.title} />
+            <motion.img
+              src={project.image}
+              alt={project.title}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.4 }}
+            />
           ) : (
             <span>[ Preview: {project.title} ]</span>
           )}
         </ImagePlaceholder>
 
-        {/* Título */}
+        <CategoryBadge>{project.category}</CategoryBadge>
         <ProjectTitle>{project.title}</ProjectTitle>
       </TitleLinkWrapper>
 
-      <div>
-        <ProjectDescription>{project.description}</ProjectDescription>
-      </div>
+      <ProjectDescription>{project.description}</ProjectDescription>
 
       <div>
         <TechIconsContainer>
