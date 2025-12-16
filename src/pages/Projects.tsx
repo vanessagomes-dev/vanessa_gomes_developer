@@ -10,6 +10,8 @@ const ProjectsContainer = styled(motion.section)`
     min-height: 100vh; 
     padding: 4rem 6rem;
     margin: 2rem 2rem;
+    border: 1px solid ${(props) => props.theme.colors.textSecondary}30;
+    border-radius: 8px;
     
     @media (max-width: 1024px) {
         padding: 2rem 1.5rem;
@@ -71,13 +73,11 @@ const ProjectsGrid = styled(motion.div)`
 const Projects: React.FC = () => {
     const [filter, setFilter] = useState('Todos');
 
-    // Extrai as categorias dinamicamente do seu projectData
     const categories = useMemo(() => {
         const cats = projectData.map(p => p.category);
         return ['Todos', ...Array.from(new Set(cats))];
     }, []);
 
-    // Filtra os projetos
     const filteredProjects = useMemo(() => {
         if (filter === 'Todos') return projectData;
         return projectData.filter(project => project.category === filter);
@@ -109,7 +109,7 @@ const Projects: React.FC = () => {
                 <AnimatePresence mode="popLayout">
                     {filteredProjects.map((project) => (
                         <motion.div
-                            key={project.title} // Usando title como chave única
+                            key={project.title} 
                             layout
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
