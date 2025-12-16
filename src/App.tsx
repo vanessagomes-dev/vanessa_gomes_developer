@@ -1,41 +1,40 @@
-import { useState, useMemo } from 'react'; 
-import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom'; 
-import GlobalStyles from './styles/GlobalStyles';
-import { lightTheme, darkTheme } from './styles/themes';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useMemo } from "react";
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
+import GlobalStyles from "./styles/GlobalStyles";
+import { lightTheme, darkTheme } from "./styles/themes";
+import { Routes, Route } from "react-router-dom";
 
-// -- COMPONENTES 
-import Header from './components/Header';
+// -- COMPONENTES
+import Header from "./components/Header";
+import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
 
 // -- PÁGINAS
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Skills from './pages/Skills';
-import Contact from './pages/Contact';
-
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import Skills from "./pages/Skills";
+import Contact from "./pages/Contact";
 
 function App() {
-  // **********************************************
-  // ** LÓGICA (HOOKS E FUNÇÕES) VEM AQUI **
-  // **********************************************
+  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
 
-  // 1. Estado para controlar o modo (light ou dark)
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+  const theme = useMemo(
+    () => (themeMode === "light" ? lightTheme : darkTheme),
+    [themeMode]
+  );
 
-  // 2. Seleciona o objeto de tema correto baseado no estado
-  const theme = useMemo(() => themeMode === 'light' ? lightTheme : darkTheme, [themeMode]);
-
-  // 3. Função para alternar entre os temas
   const toggleTheme = () => {
-    setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
+    setThemeMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Router>
+    <BrowserRouter>
+      <ScrollToTop /> 
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <BackToTop />
 
         <Header toggleTheme={toggleTheme} themeMode={themeMode} />
 
@@ -48,10 +47,8 @@ function App() {
             <Route path="/contato" element={<Contact />} />
           </Routes>
         </main>
-
-      </Router>
-    </ThemeProvider>
-    
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

@@ -12,13 +12,13 @@ interface HeaderProps {
 }
 
 // 2. Componente de Estilização Principal
-const HeaderContainer = styled(motion.header)`
+const HeaderContainer = styled(motion.create("header"))`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
   background-color: ${(props) => props.theme.colors.surface};
-  border-bottom: 1px solid ${(props) => props.theme.colors.textSecondary}10; /* Linha sutil */
+  border-bottom: 1px solid ${(props) => props.theme.colors.textSecondary}10; 
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -30,14 +30,14 @@ const HeaderContainer = styled(motion.header)`
 `;
 
 // 3. Estilos da Logo/Marca
-const LogoContainer = styled(motion(Link))`
+const LogoContainer = styled(motion.create(Link))`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
   color: ${(props) => props.theme.colors.primary};
   text-transform: uppercase;
-  text-decoration: none; /* Garante que não tenha underline */
+  text-decoration: none; 
 
   svg {
     margin-right: 0.5rem;
@@ -69,13 +69,13 @@ const NavMenu = styled.nav<{ $isOpen: boolean }>`
 
 // 5. Estilos dos Links de Navegação
 const NavLink = styled(Link)`
-  padding: 0.6rem 1.2rem; /* Aumentei um pouco para o sombreado aparecer melhor */
+  padding: 0.6rem 1.2rem;
   margin: 0 0.2rem;
   color: ${(props) => props.theme.colors.textSecondary};
   font-weight: 600;
   text-decoration: none;
-  border-radius: 8px; /* Bordas arredondadas para o sombreado ficar bonito */
-  transition: all 0.3s ease; /* Transição suave para todas as propriedades */
+  border-radius: 8px; 
+  transition: all 0.3s ease;
 
   &:hover {
     color: ${(props) => props.theme.colors.primary};
@@ -93,7 +93,7 @@ const NavLink = styled(Link)`
     border-bottom: 1px dashed ${(props) => props.theme.colors.textSecondary}10;
 
     &:hover {
-      transform: none; /* Remove o salto no mobile para não quebrar o layout */
+      transform: none; 
     }
   }
 `;
@@ -114,7 +114,7 @@ const MenuButton = styled.button`
 // 7. Botão do Toggle de Tema
 const ThemeToggle = styled.button`
   background: ${(props) =>
-    props.theme.colors.primary}15; /* Fundo transparente suave */
+    props.theme.colors.primary}15;
   color: ${(props) => props.theme.colors.primary};
   border-radius: 50%;
   padding: 0.6rem;
